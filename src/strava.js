@@ -48,5 +48,5 @@ module.exports.loginUrl = redirectUrl =>
     client_id: process.env.CLIENT_ID,
     redirect_uri: redirectUrl,
     response_type: "code",
-    scope: "activity:read,profile:read_all"
+    scope: "activity:read,activity:read_all,profile:read_all"
   });

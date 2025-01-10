@@ -1,73 +1,73 @@
-Write a narrative that describes when an athlete tends to go running, make it fun and inspiring.
+Write a narrative that describes when an athlete tends to go cycling, make it fun and inspiring.
 
 name: Colin
 gender: M
-long runs: Thursday or Monday
+long rides: Thursday or Monday
 workouts: Sunday or Monday
 time of day: morning
-mostly runs on: weekday
-narrative: We are creatures of habit, runners more so than most! You're most likely to find Colin pulling on his trainers and hitting the road (or trail) on a weekday.  Colin is a morning runner, heading out as the sun starts to rise  and when the roads are nice and quiet. We've analysed the data, and he tends to go for long runs on a Thursday or sometimes a Monday and works out on a Sundays and Mondays.
+mostly rides on: weekday
+narrative: We are creatures of habit, cyclists more so than most! You're most likely to find Colin pulling on his cycling gear and hitting the road on a weekday. Colin is a morning cyclist, heading out as the sun starts to rise and when the roads are nice and quiet. We've analysed the data, and he tends to go for long rides on a Thursday or sometimes a Monday and works out on Sundays and Mondays.
 
 name: Julie
 gender: F
-long runs: Monday 
+long rides: Monday
 workouts: Monday or Thursday
 time of day: morning
-mostly runs on: weekday
-narrative: Runners tend to live their life on a loop. You're most likely to find Julie pulling leaving the house and hitting the road on a weekday. Taking a closer look, she tends to go for long runs on a Monday and works out on a Monday, or perhaps Thursday. Also, Julie is a morning runner, heading out when the day has just begun, giving her that satisfied feeling of starting the day right.
+mostly rides on: weekday
+narrative: Cyclists tend to live their life on a loop. You're most likely to find Julie leaving the house and hitting the road on a weekday. Taking a closer look, she tends to go for long rides on a Monday and works out on a Monday, or perhaps Thursday. Also, Julie is a morning cyclist, heading out when the day has just begun, giving her that satisfied feeling of starting the day right.
 
 name: Jerry
 gender: M
-long runs: Saturday
+long rides: Saturday
 workouts: Wednesday
 time of day: evening
-mostly runs on: Thursday
-narrative: Jerry likes to keep his running on schedule, you're most likely to find him working up a sweat on a Thursday. Jerry is an evening runner, heading out as the sun starts to set, perhaps he likes to keep his runs secret? Delving into the details, Saturday seems to be his long-run day, and Wednesday is when he picks the pace up a bit, there might be a few rest days squeezed in as well. Perhaps.
+mostly rides on: Thursday
+narrative: Jerry likes to keep his cycling on schedule, you're most likely to find him working up a sweat on a Thursday. Jerry is an evening cyclist, heading out as the sun starts to set, perhaps he likes to keep his rides secret? Delving into the details, Saturday seems to be his long-ride day, and Wednesday is when he picks the pace up a bit, there might be a few rest days squeezed in as well. Perhaps.
 
 name: Phil
 gender: unknown
-long runs: weekends
+long rides: weekends
 workouts: Tuesday
 time of day: midday
-mostly runs on: weekdays
-narrative: We've analysed the data and can see that Phil is a predictable soul! Most of their runs are on the weekdays, at midday, perhaps a sneaky lunch-break runner? Back to work full of adrenaline. They tends to work out on a Tuesday and go for the all-important long runs on the weekends. If Phil keeps up this schedule, I'm sure they'll achieve his goals.
+mostly rides on: weekdays
+narrative: We've analysed the data and can see that Phil is a predictable soul! Most of their rides are on the weekdays, at midday, perhaps a sneaky lunch-break cyclist? Back to work full of adrenaline. They tend to work out on a Tuesday and go for the all-important long rides on the weekends. If Phil keeps up this schedule, I'm sure they'll achieve their goals.
 
 name: Adam
 gender: M
-long runs: Sunday
+long rides: Sunday
 workouts: Tuesday
 time of day: midday
-mostly runs on: weekends
-narrative: Let's get into the details ... Adam is a weekend runner, a time for leisure and exercise. You'll most often find him heading out and building up a sweat at midday. Looking at his training patterns, he tends to push himself harder on a Tuesday and puts the long miles in on a Sunday.
+mostly rides on: weekends
+narrative: Let's get into the details ... Adam is a weekend cyclist, a time for leisure and exercise. You'll most often find him heading out and building up a sweat at midday. Looking at his training patterns, he tends to push himself harder on a Tuesday and puts the long miles in on a Sunday.
 
 name: Ruth
 gender: F
-long runs: Monday
+long rides: Monday
 workouts: weekends
 time of day: nighttime
-mostly runs on: weekends
-narrative: We've crunched the numbers and it looks like Ruth is a weekend running. Most of her runs are in the night, some fear the darkness, but others enjoy the quiet and solitude. Looking into the details, we can see that Ruth tends to go for her long runs on a Monday, saving the weekends for the hard workout sessions. 
+mostly rides on: weekends
+narrative: We've crunched the numbers and it looks like Ruth is a weekend cyclist. Most of her rides are in the night, some fear the darkness, but others enjoy the quiet and solitude. Looking into the details, we can see that Ruth tends to go for her long rides on a Monday, saving the weekends for the hard workout sessions.
 
 name: Sara
 gender: F
-long runs: Thursday or Saturday
+long rides: Thursday or Saturday
 workouts: Tuesday or Thursday
 time of day: morning
-mostly runs on: weekdays
-narrative: Sara mostly runs on the weekdays, keeping her weekends free for more important activities no doubt. She tends to be a morning running, always a good way to start the day. Looking into the details, she tends to go for long runs on a Thursday or a Saturday, and works out on a Tuesday or sometimes Thursday.
+mostly rides on: weekdays
+narrative: Sara mostly rides on the weekdays, keeping her weekends free for more important activities no doubt. She tends to be a morning cyclist, always a good way to start the day. Looking into the details, she tends to go for long rides on a Thursday or a Saturday, and works out on a Tuesday or sometimes Thursday.
 
 name: Sam
 gender: unknown
-long runs: Sunday or Saturday
+long rides: Sunday or Saturday
 workouts: Sunday or Monday
 time of day: nighttime
-mostly runs on: Sunday
-narrative: We've had a look at Sam's data and we've learnt a lot. You're most likely to find Sam heading out of the house on a Sunday. Sam is a nightime runner, heading out as the sun sets and darkness falls. Looking at their training patterns we can see that they go for long runs on the weekend and workout on a Sunday and sometimes a Monday.
+mostly rides on: Sunday
+narrative: We've had a look at Sam's data and we've learnt a lot. You're most likely to find Sam heading out of the house on a Sunday. Sam is a nighttime cyclist, heading out as the sun sets and darkness falls. Looking at their training patterns we can see that they go for long rides on the weekend and workout on a Sunday and sometimes a Monday.
 
 name: {{name}}
 gender: {{gender}}
-long runs: {{longRunDay}}
+long rides: {{longRideDay}}
 workouts: {{workoutDay}}
 time of day: {{timeOfDay}}
-mostly runs on: {{mostlyRunsOn}}
+mostly rides on: {{mostlyRidesOn}}
 narrative:
