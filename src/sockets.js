@@ -97,7 +97,7 @@ const writeFile = async (event, filename, data) => {
 
 const filterActivity = activity =>
   !isMoreThanOneYearAgo(new Date(activity.start_date)) &&
-  activity.type === "Run";
+  activity.type === "Ride";
 
 module.exports.msgHandler = async (event, context) => {
   const authCode = JSON.parse(event.body).authCode;
@@ -135,50 +135,50 @@ module.exports.msgHandler = async (event, context) => {
   // }
 
   const athleteData = {
-    runs: [],
+    activities: [],
     generation_time: new Date().toISOString(),
     athlete
   };
 
-  // download at least one years worth of running data
+  // download at least one years worth of cycling data
   let page = 1,
     breakLoop = false;
   do {
     const activities = await httpRequest(
       activitiesRequest(page++, accessToken)
     );
-    athleteData.runs = athleteData.runs.concat(
+    athleteData.activities = athleteData.activities.concat(
       activities.filter(filterActivity)
     );
     breakLoop =
       activities.length === 0 ||
       isMoreThanOneYearAgo(new Date(last(activities).start_date));
     await updateStatus(
-      `Data for ${athleteData.runs.length} runs downloaded ...`
+      `Data for ${athleteData.activities.length} rides downloaded ...`
     );
     await wait(1000);
   } while (!breakLoop);
 
-  if (athleteData.runs.length === 0) {
+  if (athleteData.activities.length === 0) {
     await updateStatus(
-      `We could not find any runs in your Strava profile, either they are private, or you haven't recorded any yet!`
+      `We could not find any rides in your Strava profile, either they are private, or you haven't recorded any yet!`
     );
     return { statusCode: 200, body: "Data sent." };
   }
 
-  // download 6 runs that contain photos
-  await updateStatus(`Fetching additional run data ...`);
-  const runsWithPhotos = athleteData.runs
+  // download 6 rides that contain photos
+  await updateStatus(`Fetching additional ride data ...`);
+  const ridesWithPhotos = athleteData.activities
     .filter(r => r.total_photo_count > 0)
     .sort(() => 0.5 - Math.random())
     .slice(0, 6);
-  for (let i = 0; i < runsWithPhotos.length; i++) {
+  for (let i = 0; i < ridesWithPhotos.length; i++) {
     const activity = await httpRequest(
-      activityRequest(runsWithPhotos[i].id, accessToken)
+      activityRequest(ridesWithPhotos[i].id, accessToken)
     );
     // replace the existing activity with the more detailed one
-    const idx = athleteData.runs.findIndex(r => r.id === runsWithPhotos[i].id);
-    athleteData.runs[idx] = activity;
+    const idx = athleteData.activities.findIndex(r => r.id === ridesWithPhotos[i].id);
+    athleteData.activities[idx] = activity;
     await wait(1000);
   }
 
