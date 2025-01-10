@@ -9,8 +9,8 @@ const timeOfDayVectorGenerator = data =>
   );
 
 module.exports = stravaData => {
-  const yearOfRunningData = stravaData.runs;
-  const timeOfDay = timeOfDayVectorGenerator(yearOfRunningData);
+  const yearOfCyclingData = stravaData.activities;
+  const timeOfDay = timeOfDayVectorGenerator(yearOfCyclingData);
   const max = Math.max(...timeOfDay);
   return timeOfDay.map(s => s / max);
 };
