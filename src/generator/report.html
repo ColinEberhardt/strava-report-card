@@ -106,4 +106,104 @@
       </g>
       <g id="runner">
         <path
-          d="M93,38.5l-12.8-1.66-3.41-8.39a14.52,14.52,0,0,0-1-2A12.82,12.82,0,1,0,62.5,16.18a.81.81,0,0,1-.47-.1A100.32,100.32,0,0,0,45.36,9l-1.44-.47a7.17,7.17,0,0,0-7.26,1.73L24.38,22.36a7.34,7.34,0,0,0-.52,10,7.22,7.22,0,0,0,10.52.4l9-8.9,4.35,2.28L40.65,37l-.06.1a16,16,0,0,0-2.07,6.08L24.43,56.09,11.77,51.48A8.43,8.43,0,0,0,1.31,55.59a8.16,8.16,0,0,0-.19,6.68,8.26,8.26,0,0,0,4.81,4.62l17.57,6.4a8.2,8.2,0,0,0,2.84.5,8.16,8.16,0,0,0,5.38-2L46.44,61l6.84,8.7L45.22,87.25a8.42,8.42,0,0,0,2,9.95A8.25,8.25,0,0,0,50.76,99a8,8,0,0,0,1,.16,8.34,8.34,0,0,0,.89,0,8.24,8.24,0,0,0,7.49-4.81L70.35,72a8.22,8.
+          d="M93,38.5l-12.8-1.66-3.41-8.39a14.52,14.52,0,0,0-1-2A12.82,12.82,0,1,0,62.5,16.18a.81.81,0,0,1-.47-.1A100.32,100.32,0,0,0,45.36,9l-1.44-.47a7.17,7.17,0,0,0-7.26,1.73L24.38,22.36a7.34,7.34,0,0,0-.52,10,7.22,7.22,0,0,0,10.52.4l9-8.9,4.35,2.28L40.65,37l-.06.1a16,16,0,0,0-2.07,6.08L24.43,56.09,11.77,51.48A8.43,8.43,0,0,0,1.31,55.59a8.16,8.16,0,0,0-.19,6.68,8.26,8.26,0,0,0,4.81,4.62l17.57,6.4a8.2,8.2,0,0,0,2.84.5,8.16,8.16,0,0,0,5.38-2L46.44,61l6.84,8.7L45.22,87.25a8.42,8.42,0,0,0,2,9.95A8.25,8.25,0,0,0,50.76,99a8,8,0,0,0,1,.16,8.34,8.34,0,0,0,.89,0,8.24,8.24,0,0,0,7.49-4.81L70.35,72a8.22,8.22,0,0,0-1.25-10.34L63.5,58.5l4.5-9,4.5,1.5,6.5,8.5,12.5,1.5a7.5,7.5,0,0,0,1.5-15Z"
+        />
+      </g>
+    </svg>
+    <div class="container">
+      <header class="row">
+        <div class="col-md-12">
+          <div class="profile">
+            <img src="{{ profile_pic }}" />
+            <h1>
+              {{ Colin }} {{ Eberhardt }}
+              <small>{{ cyclistClassification }} cyclist</small>
+            </h1>
+          </div>
+        </div>
+      </header>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Year in review</h2>
+          <p>{{ yearInReviewNarrative }}</p>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Training pattern</h2>
+          <p>{{ trainingPatternNarrative }}</p>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Annual schedule</h2>
+          <div id="schedule"></div>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Time of day</h2>
+          <div id="timeOfDay"></div>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Kudos</h2>
+          <p>
+            On average, {{ Colin }} received {{ thirteen }} kudos per ride, with
+            {{ north_tyneside_ten }} being the most popular ride, receiving
+            {{ forty }} kudos.
+          </p>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Location</h2>
+          <p>
+            {{ Colin }}'s most frequent location for cycling is
+            {{ most_frequent_location }}, where {{ he }} cycled
+            {{ most_frequent_location_frequency }}% of the time.
+            {{#if single_location}}
+            {{ he }} only cycled in one location.
+            {{else}}
+            {{#if other_locations_one}}
+            Other locations include {{ other_locations_one }} and
+            {{ other_locations_two }}.
+            {{/if}}
+            {{#if furthest_location}}
+            The furthest location {{ he }} cycled was {{ furthest_location }}.
+            {{/if}}
+            {{/if}}
+          </p>
+          <div id="map"></div>
+        </div>
+      </section>
+      <section class="row">
+        <div class="col-md-12">
+          <h2>Gallery</h2>
+          <div class="gallery">
+            {{#each gallery}}
+            <img src="{{ this }}" />
+            {{/each}}
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      const schedule = {{ annual_schedule }};
+      const timeOfDay = {{ time_of_day }};
+      const allLocations = {{ all_locations }};
+      const map = L.map("map").setView([51.505, -0.09], 13);
+      L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }
+      ).addTo(map);
+      allLocations.forEach((location) => {
+        L.marker([location[0], location[1]]).addTo(map);
+      });
+    </script>
+  </body>
+</html>
