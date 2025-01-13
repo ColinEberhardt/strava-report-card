@@ -46,24 +46,24 @@ const HEIGHT_DATA = [
   ["The Great Pyramid of Giza", 146],
 ];
 
-// runs in miles
+// rides in miles
 const CLASSIFICATION_DATA = [
-  ["extreme runner", 2000],
-  ["running addict", 1500],
-  ["serious runner", 600],
-  ["recreational runner", 300],
-  ["occasional runner", 0],
+  ["extreme cyclist", 2000],
+  ["cycling addict", 1500],
+  ["serious cyclist", 600],
+  ["recreational cyclist", 300],
+  ["occasional cyclist", 0],
 ];
 
 module.exports = async (stravaData) => {
   const useImperial = stravaData.athlete.measurement_preference === "feet";
 
-  const yearOfRunningData = stravaData.runs;
-  const totalRuns = yearOfRunningData.length;
+  const yearOfCyclingData = stravaData.rides;
+  const totalRides = yearOfCyclingData.length;
 
   const name = stravaData.athlete.firstname.trim();
 
-  const totalMiles = sum(yearOfRunningData, (d) => d.distance);
+  const totalMiles = sum(yearOfCyclingData, (d) => d.distance);
   const totalMilesFormatted = useImperial
     ? `${formatInteger(Math.floor(totalMiles))} miles`
     : `${formatInteger(Math.floor(totalMiles * MILES_TO_KILOMETRES))} km`;
@@ -72,25 +72,25 @@ module.exports = async (stravaData) => {
     .convertToText((totalMilesMatch[1] / totalMiles).toFixed(0))
     .toLowerCase()} years`;
 
-  const totalClimb = sum(yearOfRunningData, (d) => d.total_elevation_gain);
+  const totalClimb = sum(yearOfCyclingData, (d) => d.total_elevation_gain);
   const totalClimbFormatted = useImperial
     ? `${formatInteger(Math.floor(totalClimb * METRES_TO_FEET))} feet`
     : `${formatInteger(Math.floor(totalClimb))} metres`;
 
-  const runnerClassification = matchClosest(CLASSIFICATION_DATA, totalMiles)[0];
+  const cyclistClassification = matchClosest(CLASSIFICATION_DATA, totalMiles)[0];
 
   const heightComparison = matchClosest(HEIGHT_DATA, totalClimb / 2);
   const totalClimbComparison = `climbing ${heightComparison[0]} ${numberToText
     .convertToText((totalClimb / heightComparison[1]).toFixed(0))
     .toLowerCase()} times`;
 
-  const totalHoursRun = Math.floor(
-    sum(yearOfRunningData, (d) => d.elapsed_time * SECONDS_TO_HOURS)
+  const totalHoursRide = Math.floor(
+    sum(yearOfCyclingData, (d) => d.elapsed_time * SECONDS_TO_HOURS)
   );
 
-  const runningDays = yearOfRunningData.map((s) => roundToDay(s.startDate).ts);
+  const ridingDays = yearOfCyclingData.map((s) => roundToDay(s.startDate).ts);
   const longestStreak =
-    streakLength(runningDays, (prev, curr) => prev - curr === 86400000) + 1;
+    streakLength(ridingDays, (prev, curr) => prev - curr === 86400000) + 1;
 
   const templateText = String(
     fs.readFileSync("./src/generator/paragraphs/prompts/yearInReview.txt")
@@ -101,19 +101,19 @@ module.exports = async (stravaData) => {
     gender: genderString(stravaData.athlete.sex),
     totalMiles: totalMilesFormatted,
     totalMilesComparison,
-    totalRuns,
-    totalHoursRun,
+    totalRides,
+    totalHoursRide,
     longestStreak,
     totalClimb: totalClimbFormatted,
     totalClimbComparison,
-    runnerClassification,
+    cyclistClassification,
   });
   const yearInReviewNarrative = await narrativeGenerator(prompt);
 
   return {
-    totalRuns,
+    totalRides,
     longestStreak,
-    runnerClassification,
+    cyclistClassification,
     totalMiles: totalMilesFormatted,
     totalClimb: totalClimbFormatted,
     yearInReviewNarrative,

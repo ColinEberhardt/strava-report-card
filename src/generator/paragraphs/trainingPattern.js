@@ -83,14 +83,14 @@ const TIME_OF_DAY_PROFILE = [
 ];
 
 module.exports = async (stravaData) => {
-  const yearOfRunningData = stravaData.runs;
+  const yearOfCyclingData = stravaData.rides;
 
   const upperDistanceQuantile = quantile(
-    yearOfRunningData.map((d) => d.distance).sort((a, b) => a - b),
+    yearOfCyclingData.map((d) => d.distance).sort((a, b) => a - b),
     0.85
   );
   const upperPaceQuantile = quantile(
-    yearOfRunningData.map((d) => d.pace).sort((a, b) => a - b),
+    yearOfCyclingData.map((d) => d.pace).sort((a, b) => a - b),
     0.85
   );
 
@@ -113,15 +113,15 @@ module.exports = async (stravaData) => {
   const closestWeekdayVector = closestVector(
     WEEKDAY_PROFILE,
     (d) => d.vector,
-    weekdayVectorGenerator(yearOfRunningData)
+    weekdayVectorGenerator(yearOfCyclingData)
   );
-  const mostlyRunsOn = closestWeekdayVector.name;
+  const mostlyRidesOn = closestWeekdayVector.name;
 
-  const longRunDay = closestVector(
+  const longRideDay = closestVector(
     WEEKDAY_PROFILE.filter((p) => p.weekday),
     (d) => d.vector,
     weekdayVectorGenerator(
-      yearOfRunningData.filter((d) => d.distance > upperDistanceQuantile)
+      yearOfCyclingData.filter((d) => d.distance > upperDistanceQuantile)
     )
   ).name;
 
@@ -129,7 +129,7 @@ module.exports = async (stravaData) => {
     WEEKDAY_PROFILE.filter((p) => p.weekday),
     (d) => d.vector,
     weekdayVectorGenerator(
-      yearOfRunningData.filter(
+      yearOfCyclingData.filter(
         (d) => d.pace > upperPaceQuantile && d.distance < upperDistanceQuantile
       )
     )
@@ -138,7 +138,7 @@ module.exports = async (stravaData) => {
   const timeOfDay = closestVector(
     TIME_OF_DAY_PROFILE,
     (d) => d.vector,
-    timeOfDayVectorGenerator(yearOfRunningData)
+    timeOfDayVectorGenerator(yearOfCyclingData)
   ).name;
 
   const name = stravaData.athlete.firstname.trim();
@@ -150,15 +150,15 @@ module.exports = async (stravaData) => {
   prompt = template({
     name,
     gender: genderString(stravaData.athlete.sex),
-    longRunDay,
+    longRideDay,
     workoutDay,
     timeOfDay,
-    mostlyRunsOn,
+    mostlyRidesOn,
   });
   const trainingPatternNarrative = await narrativeGenerator(prompt);
 
   return {
     trainingPatternNarrative,
-    mostlyRunsOn,
+    mostlyRidesOn,
   };
 };

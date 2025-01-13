@@ -39,8 +39,8 @@ module.exports = stravaData => {
     }),
     single_location: locations.length === 1,
     most_frequent_location_frequency: (
-      (stravaData.locations[0].runs * 100) /
-      stravaData.runs.length
+      (stravaData.locations[0].rides * 100) /
+      stravaData.rides.length
     ).toFixed(0),
     all_locations: JSON.stringify(stravaData.locations.map(l => l.location))
   };

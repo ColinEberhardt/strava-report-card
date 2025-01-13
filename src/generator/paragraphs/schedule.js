@@ -6,24 +6,24 @@ const sameDay = (d1, d2) =>
 
 module.exports = stravaData => {
   const upperDistanceQuantile = quantile(
-    stravaData.runs.map(d => d.distance).sort((a, b) => a - b),
+    stravaData.rides.map(d => d.distance).sort((a, b) => a - b),
     0.85
   );
   const upperPaceQuantile = quantile(
-    stravaData.runs.map(d => d.pace).sort((a, b) => a - b),
+    stravaData.rides.map(d => d.pace).sort((a, b) => a - b),
     0.85
   );
-  const runType = run => {
-    if (run.distance > upperDistanceQuantile) {
+  const rideType = ride => {
+    if (ride.distance > upperDistanceQuantile) {
       return 2; // long
     }
-    if (run.pace > upperPaceQuantile) {
+    if (ride.pace > upperPaceQuantile) {
       return 3; // workout
     }
     return 0;
   };
 
-  const activityType = runs => Math.max(...runs.map(runType));
+  const activityType = rides => Math.max(...rides.map(rideType));
 
   const now = DateTime.fromISO(stravaData.generation_time);
   return (
@@ -31,16 +31,16 @@ module.exports = stravaData => {
       // create a year of days
       .map(days => now.minus({ days: days }))
       .map(day => {
-        // find the runs on that day
-        const runs = stravaData.runs.filter(d =>
+        // find the rides on that day
+        const rides = stravaData.rides.filter(d =>
           sameDay(day, DateTime.fromISO(d.start_date_local))
         );
         return {
           day,
-          runs: runs.length,
-          type: runs.length > 0 ? activityType(runs) : 0,
-          titles: runs.map(r => r.name),
-          distance: runs.reduce((prev, curr) => prev + curr.distance, 0)
+          rides: rides.length,
+          type: rides.length > 0 ? activityType(rides) : 0,
+          titles: rides.map(r => r.name),
+          distance: rides.reduce((prev, curr) => prev + curr.distance, 0)
         };
       })
   );

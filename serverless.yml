@@ -1,4 +1,4 @@
-service: strava-report-card
+service: strava-bike-report-card
 
 provider:
   name: aws
@@ -36,7 +36,7 @@ custom:
   assets:
     verbose: true
     targets:
-      - bucket: run-report.com
+      - bucket: bike-report.com
         acl: public-read
         files:
         - source: static/

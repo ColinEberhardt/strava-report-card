@@ -1,4 +1,3 @@
-
 const calendarData = JSON.parse(
     document.getElementById("calendar").getAttribute("data-schedule")
 );
@@ -35,12 +34,12 @@ d3.select("#calendar")
         switch (d.type) {
             case 3: // workout
                 return "workout";
-            case 2: // long run
+            case 2: // long ride
                 return "long";
             case 1: // race
                 return "race";
         }
-        return d.runs > 0 ? "regular" : "no-run";
+        return d.rides > 0 ? "regular" : "no-ride";
     })
     .append("title")
     .text(d => d.titles.join(", "));

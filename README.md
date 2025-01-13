@@ -1,6 +1,6 @@
-# Running Report Card
+# Cycling Report Card
 
-Creates a narrative report card from Strava user's running data.
+Creates a narrative report card from Strava user's cycling data.
 
  - The service is hosted here, [run-report.com](https://run-report.com/)
  - You can find more details about this via the blog post, [Creating personalised data stories with GPT-3](https://blog.scottlogic.com/2021/12/08/narrative-dashboard.html)
@@ -22,12 +22,12 @@ npm run deploy
 ## TODO 
 
 ### features to add
-- [x] run streak
+- [x] ride streak
 - [x] active days
 - [x] geoclustering to provide location commentary
-- [x] longest run
+- [x] longest ride
 - [x] total distance comparison
-- [ ] fastest and slowest runs?
+- [ ] fastest and slowest rides?
 - [x] add tooltips to the calendar view
 
 ### infrastructure

@@ -35,7 +35,7 @@ const possessivePronoun = (sex) => {
 module.exports = async (stravaData) => {
   try {
     // perform some simple data transformations and enrichment
-    stravaData.runs.forEach((d) => {
+    stravaData.rides.forEach((d) => {
       d.startDate = DateTime.fromISO(d.start_date_local);
       d.distance = d.distance * METRES_TO_MILES;
       d.pace = d.distance / d.elapsed_time;
@@ -43,13 +43,13 @@ module.exports = async (stravaData) => {
 
     // ensure we only use the past year of data
     const generationTime = DateTime.fromISO(stravaData.generation_time);
-    stravaData.runs = stravaData.runs
+    stravaData.rides = stravaData.rides
       .filter(
         (d) =>
           Interval.fromDateTimes(d.startDate, generationTime).length("years") <
           1.0
       )
-      .filter((d) => d.type === "Run");
+      .filter((d) => d.type === "Ride");
 
     // replace the default avatar
     const profilePic =
@@ -64,7 +64,7 @@ module.exports = async (stravaData) => {
     const reportData = {
       id: stravaData.athlete.id,
       encoded_title: encodeURI(
-        `A running report card for ${stravaData.athlete.firstname.trim()} ${stravaData.athlete.lastname.trim()}`
+        `A cycling report card for ${stravaData.athlete.firstname.trim()} ${stravaData.athlete.lastname.trim()}`
       ),
       Colin: stravaData.athlete.firstname.trim(),
       Eberhardt: stravaData.athlete.lastname.trim(),

@@ -56,7 +56,7 @@ const findClusters = (coordinates, bias = 0.001, depth = 0) => {
 
 module.exports = async (stravaData) => {
   try {
-    const coordinates = stravaData.runs
+    const coordinates = stravaData.rides
       .map((r) => r.start_latlng)
       .filter((r) => r)
       .filter((r) => r.length === 2);
@@ -65,16 +65,16 @@ module.exports = async (stravaData) => {
       return [];
     }
 
-    // cluster by location, with the number of runs per cluster
+    // cluster by location, with the number of rides per cluster
     // this should produce approx 10 clusters
     console.log(coordinates);
 
     let clusters = findClusters(coordinates)
       .map((c) => ({
         location: c.centroid,
-        runs: c.elements.length,
+        rides: c.elements.length,
       }))
-      .sort((a, b) => b.runs - a.runs);
+      .sort((a, b) => b.rides - a.rides);
 
     // compute distance from most popular
     clusters.forEach((c, i) => {
